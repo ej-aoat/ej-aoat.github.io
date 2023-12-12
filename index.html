@@ -21,6 +21,10 @@
       <input id="responseHeaderName" placeholder="responseHeaderName" />
     </div>
 
+    <div>
+      <input id="requestApi" placeholder="requestApi" />
+    </div>
+
     <button type="button" id="sendButton">Send Request</button>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -38,9 +42,15 @@
           }
 
           var contextPath = $('#contextPath').val();
+          
+          var requestApi = $('#requestApi').val();
+          if (!requestApi) {
+            console.log('requestApiを初期値にします');
+            requestApi = 'cors';
+          }
 
           $.ajax({
-            url: 'http://localhost:8080/' + contextPath + '/cors',
+            url: 'http://localhost:8080/' + contextPath + '/' + requestApi,
             type: 'GET',
             dataType: 'text',
             headers: headers
